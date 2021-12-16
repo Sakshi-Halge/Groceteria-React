@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 import GetInfo from "./GetInfo";
 import "./Details.css";
 
@@ -13,26 +15,26 @@ class Details extends Component {
       payClassName: "",
       productInfo: "",
       quantity: 1,
-      price : ''
+      price: "",
     };
   }
 
   setprice = () => {
-    this.setState({ totalPrice: (this.state.price * this.state.quantity) });
-  }
+    this.setState({ totalPrice: this.state.price * this.state.quantity });
+  };
 
   decreaseQuan = () => {
     if (this.state.quantity > 1) {
-      this.setState({ quantity: this.state.quantity - 1 },() => {
+      this.setState({ quantity: this.state.quantity - 1 }, () => {
         this.setprice();
       });
     }
   };
 
   increaseQuan = () => {
-      this.setState({ quantity: this.state.quantity + 1 }, () => {
-        this.setprice();
-      });
+    this.setState({ quantity: this.state.quantity + 1 }, () => {
+      this.setprice();
+    });
   };
 
   renderPreviwImages = (data) => {
@@ -230,6 +232,7 @@ class Details extends Component {
   render() {
     return (
       <>
+        <Header />
         {this.renderProductInfo()}
 
         <GetInfo
@@ -247,6 +250,7 @@ class Details extends Component {
           }
           id={this.state.productInfo ? this.state.productInfo.id : ""}
         />
+        <Footer />
       </>
     );
   }
@@ -257,7 +261,10 @@ class Details extends Component {
       .then((res) => res.json())
       .then((data) => {
         this.setState({ productInfo: data[0] }, () => {
-          this.setState({ totalPrice: this.state.productInfo.price, price :this.state.productInfo.price});
+          this.setState({
+            totalPrice: this.state.productInfo.price,
+            price: this.state.productInfo.price,
+          });
         });
       });
   }
@@ -304,6 +311,5 @@ class Details extends Component {
     });
   }
 }
-
 
 export default Details;

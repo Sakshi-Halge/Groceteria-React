@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import ReactPaginate from "react-paginate";
-import ViewCartsDisplay from './ViewCartsDisplay'
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import ViewCartsDisplay from "./ViewCartsDisplay";
 import "./ViewCarts.css";
 
 const filterurl = "https://groceteriaapi.herokuapp.com/viewcart/";
 const deleteApi = "https://groceteriaapi.herokuapp.com/deletecart/";
 
 const limit = 4;
-let emailid ;
+let emailid;
 
 class ViewOrders extends Component {
   constructor(props) {
@@ -46,7 +48,7 @@ class ViewOrders extends Component {
             }
           );
         });
-    })
+    });
   };
 
   handlePageChange = ({ selected }) => {
@@ -67,8 +69,12 @@ class ViewOrders extends Component {
           <h2 className="orders-text">Your Carts</h2>
 
           <div className="orders-box">
-            <ViewCartsDisplay orders_list={this.state.ordersList}
-            removeCart = {(id) => { this.removeCart(id)}} />
+            <ViewCartsDisplay
+              orders_list={this.state.ordersList}
+              removeCart={(id) => {
+                this.removeCart(id);
+              }}
+            />
             <ReactPaginate
               previousLabel={<span>Prev</span>}
               nextLabel={<span>Next</span>}
@@ -96,7 +102,13 @@ class ViewOrders extends Component {
   };
 
   render() {
-    return <>{this.renderContent()}</>;
+    return (
+      <>
+        <Header />
+        {this.renderContent()}
+        <Footer />
+      </>
+    );
   }
 
   componentDidUpdate() {

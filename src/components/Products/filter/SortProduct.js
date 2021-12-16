@@ -8,8 +8,12 @@ class SortProduct extends Component {
       .then((res) => res.json())
       .then((data) => {
         this.props.setdataByFilter(data);
-            this.props.setFilterSearchBox();
-
+        this.props.setFilterSearchBox();
+        if (data.length > 0) {
+          this.props.checkData(true);
+        } else {
+          this.props.checkData(false);
+        }
       });
   };
   render() {

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 import "./Listing.css";
 
 const url = "https://groceteriaapi.herokuapp.com/sub_category/";
@@ -36,10 +38,13 @@ class Listing extends Component {
   render() {
     return (
       <>
+        <Header />
+
         <div className="listing-box">
           <h1 className="listing-title">Shop by Category</h1>
           <div className="listing-items">{this.renderCategory()}</div>
         </div>
+        <Footer />
       </>
     );
   }
@@ -56,7 +61,7 @@ class Listing extends Component {
         });
     });
   }
-  
+
   componentDidMount() {
     const categoryId = this.props.match.params.catId;
     this.setState({ catId: categoryId }, () => {

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import ReactPaginate from "react-paginate";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 import ViewOrdersDisplay from "./ViewOrdersDisplay";
 import "./ViewOrders.css";
 
@@ -31,7 +33,7 @@ class ViewOrders extends Component {
 
   renderContent = () => {
     if (sessionStorage.getItem("userData")) {
-      emailid = sessionStorage.getItem("userData").split(',')[1]
+      emailid = sessionStorage.getItem("userData").split(",")[1];
       return (
         <>
           <h1 className="orders-text">Your Orders</h1>
@@ -55,23 +57,21 @@ class ViewOrders extends Component {
           </div>
         </>
       );
-      
-      
-    }
-    else{
+    } else {
       return (
         <div>
           <h1 className="do-login">Login first to see Orders</h1>
         </div>
       );
     }
-
-  }
+  };
 
   render() {
     return (
       <>
+        <Header />
         {this.renderContent()}
+        <Footer />
       </>
     );
   }

@@ -1,22 +1,24 @@
 import React, { Component } from "react";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 import OfferComponent from "./OfferComponent";
 import OfferfiftyComponent from "./OfferfiftyComponent";
 import OfferNintyNineComponent from "./OfferNintyNinePrice";
 import OfferCategory from "./OfferCategory";
-import OfferTwentyComponent from './OfferTwentyComponent'
-import MainCatOffer from './MainCatOffer'
+import OfferTwentyComponent from "./OfferTwentyComponent";
+import MainCatOffer from "./MainCatOffer";
 import "./Main.css";
-
 
 class Main extends Component {
   constructor(props) {
     super();
-    
   }
 
   render() {
     return (
       <>
+        <Header />
+
         <main>
           <div className="offer-div">
             <OfferComponent />
@@ -40,7 +42,8 @@ class Main extends Component {
                 </div>
                 <img
                   src="https://img.icons8.com/ios-glyphs/30/000000/more-than.png"
-                  className="next-on" alt="nextimg"
+                  className="next-on"
+                  alt="nextimg"
                 />
               </div>
               <div className="select-div">
@@ -57,7 +60,8 @@ class Main extends Component {
                 </div>
                 <img
                   src="https://img.icons8.com/ios-glyphs/30/000000/more-than.png"
-                  className="next-on" alt="nexton"
+                  className="next-on"
+                  alt="nexton"
                 />
                 {/* <i class="fas fa-chevron-right next-on"></i> */}
               </div>
@@ -101,11 +105,10 @@ class Main extends Component {
           </div>
           <MainCatOffer />
         </main>
+        <Footer />
       </>
     );
   }
-
-  
 }
 
 export default Main;

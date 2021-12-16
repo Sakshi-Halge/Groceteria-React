@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 import ProductsComponentDisplay from "./ProductsComponentDisplay";
-import Discount from './filter/Discount'
-import ProductPrice from "./filter/ProductPrice"
-import SortProduct from "./filter/SortProduct"
+import Discount from "./filter/Discount";
+import ProductPrice from "./filter/ProductPrice";
+import SortProduct from "./filter/SortProduct";
 import "./ProductsComponent.css";
 
 const url = "https://groceteriaapi.herokuapp.com/product?subId=";
@@ -19,6 +21,7 @@ class ProductsComponentApi extends Component {
       productId: "",
       catId: "",
       main_cat_name: "",
+      hasData: true,
     };
   }
 
@@ -28,6 +31,10 @@ class ProductsComponentApi extends Component {
 
     filter_search.classList.remove("filter-active");
     subArrow.classList.remove("sub-arrow-active");
+  };
+
+  hasDatainList = (val) => {
+    this.setState({ hasData: val });
   };
 
   setProductsByFilter = (data) => {
@@ -64,6 +71,8 @@ class ProductsComponentApi extends Component {
   render() {
     return (
       <>
+        <Header />
+
         <div className="products-section">
           <div className="sub-category" ref="subCategory">
             <h2>Sub Category</h2>
@@ -85,6 +94,9 @@ class ProductsComponentApi extends Component {
               setFilterSearchBox={() => {
                 this.setFilterSearchBox();
               }}
+              checkData={(value) => {
+                this.hasDatainList(value);
+              }}
             />
 
             <ProductPrice
@@ -94,6 +106,9 @@ class ProductsComponentApi extends Component {
               }}
               setFilterSearchBox={() => {
                 this.setFilterSearchBox();
+              }}
+              checkData={(value) => {
+                this.hasDatainList(value);
               }}
             />
 
@@ -105,17 +120,25 @@ class ProductsComponentApi extends Component {
               setFilterSearchBox={() => {
                 this.setFilterSearchBox();
               }}
+              checkData={(value) => {
+                this.hasDatainList(value);
+              }}
             />
           </div>
           <div className="filter-result">
-            <ProductsComponentDisplay productList={this.state.productList} />
+            <ProductsComponentDisplay
+              productList={this.state.productList}
+              hasdata={this.state.hasData}
+            />
           </div>
         </div>
+        <Footer />
       </>
     );
   }
 
   componentWillReceiveProps(nextProps) {
+    this.hasDatainList(true);
     const productId = nextProps.match.params.productId;
     this.setState(
       {
@@ -137,7 +160,7 @@ class ProductsComponentApi extends Component {
       }
     );
   }
-  
+
   componentDidMount() {
     const productId = this.props.match.params.productId;
     this.setState(
